@@ -1,4 +1,4 @@
-import { writeFile, readFile, unlink, rename, copyFile, stat, appendFile } from "fs/promises";
+import { writeFile, readFile, unlink, rename, copyFile, stat, appendFile, mkdir } from "fs/promises";
 import { ask } from "./menu.js";
 import path from "path";
 import { rmdir } from "fs";
@@ -104,5 +104,16 @@ async function updateFile(){
         console.log(err);
     }
 }
+async function CreateFolder(){
+    try{
+        const foldername = await ask ("Enter Folder Name: ");
+        const folderpath = path.join("folder", foldername );
+        await mkdir(folderpath,{recursive: true});
+        console.log("✅Folder Created Successfully.")
+        
+    }catch(err){
+        console.log(err)
+    }
+}
 
-export { createFile, readMyFile, removeFile, renameFile, fileCopy, details, updateFile };
+export { createFile, readMyFile, removeFile, renameFile, fileCopy, details, updateFile, CreateFolder };

@@ -23,7 +23,15 @@ async function showMenu() {
     console.log("5. Copy File");
     console.log("6. File Details");
     console.log("7. Update Details")
-    console.log("8. Exit");
+    console.log("8. Create Folder");
+    console.log("9. Delete Folder");
+    console.log("10. Search File");
+    console.log("11. Check File Exist");
+    console.log("12. Count Files");
+    console.log("13. Count Folder");
+    console.log("14. Storage Used");
+    console.log("15. List Files");
+    console.log("16. Exit");
 
     const choice = await ask("\nChoose an option: ");
 

@@ -1,4 +1,4 @@
-import { createFile, readMyFile, removeFile, renameFile, fileCopy, details, updateFile } from "./filemanager.js";
+import { createFile, readMyFile, removeFile, renameFile, fileCopy, details, updateFile, CreateFolder } from "./filemanager.js";
 import { showMenu, rl } from "./menu.js";
 
 async function main() {
@@ -34,8 +34,11 @@ async function main() {
             case "7":
                 await updateFile();
                 break;
-
             case "8":
+                await CreateFolder();
+                break;
+
+            case "16":
                 console.log("Exit");
                 rl.close();
                 return;
