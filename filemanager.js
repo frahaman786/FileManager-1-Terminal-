@@ -1,7 +1,7 @@
-import { writeFile, readFile, unlink, rename, copyFile, stat, appendFile, mkdir } from "fs/promises";
+import { writeFile, readFile, unlink, rename, copyFile, stat, appendFile, mkdir, rm, readdir, access} from "fs/promises";
 import { ask } from "./menu.js";
 import path from "path";
-import { rmdir } from "fs";
+
 
 
 async function createFile() {
@@ -115,5 +115,68 @@ async function CreateFolder(){
         console.log(err)
     }
 }
+async function RemoveFolder(){
+    try{
+        const foldername = await ask("Enter Folder Name: ");
+        const folderpath = path.join("folder", foldername);
+        await rm(folderpath, {recursive : true, force : true})
+        console.log("✅Folder Delted")
+    }catch(err){
+        console.log(err)
+    }
+}
+async function SearchFile(){
+    try{
+        const filename = await ask("Enter File Name: ");
+        const files = await readdir("files");
+        if(files.includes(filename)){
+            console.log("✅ File Found");
+        }else{
+            console.log("❌Files Not Found");
+        }
+    }catch(err){
+        console.log(err)
+    }
+}
+async function existFile(){
+    try{
+        const filename = await ask("Enter File Name: ");
+        const filepath = path.join("files", filename);
+        await access(filepath);
+        console.log("✅File Exist")
+        
+    }catch(err){
+        console.log("❌Files Doesnot Exist");
+    }
+}
 
-export { createFile, readMyFile, removeFile, renameFile, fileCopy, details, updateFile, CreateFolder };
+async function countFile(){
+    try{
+        const folderpath = path.join("files");
+        const files = await readdir(folderpath);
+        console.log(`Total files ${files.length}`);
+
+    }catch(err){
+        console.log(err);
+    }
+}
+async function storageused(){
+    try{
+        const folderpath = path.join("files");
+        const files = await readdir(folderpath);
+
+        let totalSize = 0;
+        for(const file of files){
+            const filepath = path.join(folderpath, file);
+            const info = await stat(filepath);
+            totalSize += info.size;
+        }
+        console.log(`Total Storage: ${totalSize} Bytes`);
+        console.log(`Total Storage: ${(totalSize/1024).toFixed(2)} KB`);
+        console.log(`Total Storage: ${(totalSize/(1024*1024)).toFixed(2)} MB`);
+    }catch(err){
+        console.log(err.message);
+    }
+}
+
+export { createFile, readMyFile, removeFile, renameFile, fileCopy, details, updateFile, CreateFolder, RemoveFolder, SearchFile, existFile, countFile, storageused };
