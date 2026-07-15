@@ -155,6 +155,7 @@ async function countFile(){
         const folderpath = path.join("files");
         const files = await readdir(folderpath);
         console.log(`Total files ${files.length}`);
+        
 
     }catch(err){
         console.log(err);
@@ -178,5 +179,17 @@ async function storageused(){
         console.log(err.message);
     }
 }
+async function count(){
+    try{
+        const folderpath = path.join("files");
+        const files = await readdir(folderpath);
+        console.log("======");
+        console.log("\n"+ files);
+        
 
-export { createFile, readMyFile, removeFile, renameFile, fileCopy, details, updateFile, CreateFolder, RemoveFolder, SearchFile, existFile, countFile, storageused };
+    }catch(err){
+        console.log(err);
+    }
+}
+
+export { createFile, readMyFile, removeFile, renameFile, fileCopy, details, updateFile, CreateFolder, RemoveFolder, SearchFile, existFile, countFile, storageused, count };

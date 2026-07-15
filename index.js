@@ -1,4 +1,4 @@
-import { createFile, readMyFile, removeFile, renameFile, fileCopy, details, updateFile, CreateFolder, RemoveFolder, SearchFile, existFile, countFile, storageused } from "./filemanager.js";
+import { createFile, readMyFile, removeFile, renameFile, fileCopy, details, updateFile, CreateFolder, RemoveFolder, SearchFile, existFile, countFile, storageused, count } from "./filemanager.js";
 import { showMenu, rl } from "./menu.js";
 
 async function main() {
@@ -51,6 +51,9 @@ async function main() {
                 break;
             case "14":
                 await storageused();
+                break;
+            case "15":
+                await count();
                 break;
 
             case "16":
